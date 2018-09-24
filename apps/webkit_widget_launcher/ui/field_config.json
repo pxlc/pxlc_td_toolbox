@@ -1,0 +1,23 @@
+{
+    'my_select': {
+        'label': 'My Select',
+        'field_type': 'string',
+        'input_type': 'SELECT',
+        'filler': {
+        },
+        'change_cb': '',
+        '//': null
+    },
+
+    'my_text': {
+        'label': 'My Text Field',
+        'field_type': 'string',
+        'input_type': 'text',
+        'keypress_filters': [''],
+        'keypress_cb': '',
+        'change_cb': '',
+        '//': null
+    },
+
+    '//': null
+}

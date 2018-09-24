@@ -1,0 +1,30 @@
+
+<div style="padding: 0px;" pwui_cmd_name="{{ CMD_NAME }}">
+
+<div class="Q_cmd_top pwui_dialog_title pwui_title_font">
+    {{ CMD_TITLE }}
+</div>
+
+<div class="Q_cmd_top pwui_dialog_panel" pwui_cmd="{{ CMD_NAME }}">
+    <div class="Q_cmd_input">
+        Sequence: <SELECT name="sequence" onchange="CMD_{{ CMD_NAME }}.trigger_shot_select_rebuild(event);">
+            <option value="null" disabled selected>Select Sequence</option>
+            {% for seq in SEQ_SELECT_OPTION_LIST %}
+            <option value='JSON{"id":{{ seq.id }},"code":"{{ seq.code }}","entity_type":"Sequence"}'>{{ seq.code }}</option>
+            {% endfor %}
+        </SELECT>
+
+        Shot: <SELECT id="{{ SHOT_SELECT_ID }}" name="shot">
+            <option value="null" disabled selected>Select Shot</option>
+        </SELECT>
+    </div>
+    <div class="Q_cmd_actions">
+        <img width="16px" src="{{ FPRE }}{{ ICON_DIR_PATH }}/accept.png" title="Hello?"/>
+        <div class="pwui_button" style="width: 80px;"
+            onclick="pwui.handle_cmd(event, CMD_{{ CMD_NAME }});">Submit</div>
+    </div>
+</div>
+
+</div>
+
+

@@ -1,0 +1,41 @@
+
+<div style="padding: 0px;" pwui_cmd_name="{{ CMD_NAME }}">
+
+<div class="Q_cmd_top pwui_dialog_title pwui_title_font">
+    {{ CMD_TITLE }}
+</div>
+
+<div class="Q_cmd_top pwui_dialog_panel" pwui_cmd="{{ CMD_NAME }}">
+    <div class="Q_cmd_input">
+        <p class="pwui_entry">Text Entry: <input type="text" name="first_name" size="35" value=""></p>
+        <p class="pwui_entry">Whole Number: <input type="number" name="age" value="" num_type="int"></p>
+        <p class="pwui_entry">Float: <input type="number" name="weight" value=""></p>
+        <p class="pwui_entry">Choice 1 (no default):
+            One <input type="radio" name="choice_1" value="One">
+            Two <input type="radio" name="choice_1" value="Two">
+            Three <input type="radio" name="choice_1" value="Three"> 
+        </p>
+        <p class="pwui_entry">Choice 2 (with default):
+            A <input type="radio" name="choice_2" value="A" checked="checked">
+            B <input type="radio" name="choice_2" value="B">
+            C <input type="radio" name="choice_2" value="C"> 
+        </p>
+        <p class="pwui_entry">Options: 
+            Do This <input type="checkbox" name="opt_this">
+            Do That <input type="checkbox" name="opt_that">
+            Do The Other Thing <input type="checkbox" name="opt_theotherthing">
+            Defaulted True <input type="checkbox" name="opt_defaultedtrue" checked="checked">
+        </p>
+    </div>
+    <div class="Q_cmd_actions">
+        <!--
+        <img width="16px" src="{{ FPRE }}{{ ICON_DIR_PATH }}/accept.png" title="Hello?"/>
+        -->
+        <div class="pwui_button" style="width: 80px;"
+            onclick="pwui.handle_cmd(event, CMD_{{ CMD_NAME }});">Submit</div>
+    </div>
+</div>
+
+</div>
+
+

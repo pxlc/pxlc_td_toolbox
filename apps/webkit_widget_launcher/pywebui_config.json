@@ -1,0 +1,27 @@
+{
+    "PATHS": {
+        "//": "-----------------------------------------------------------------------------------------",
+        "//": "Use web_lib path to point to your installs of jQuery, Bootstrap, etc., if you need those.",
+        "//": "-----------------------------------------------------------------------------------------",
+        "WEB_LIB": {
+            "win32": "",
+            "linux2": "",
+            "darwin": ""
+        },
+
+        "//": "-----------------------------------------------------------------------------------------",
+        "//": "Set icon_dir path to point to your icon image files.",
+        "//": "-----------------------------------------------------------------------------------------",
+        "ICON_DIR": {
+            "win32": "D:/local_lib/icons/famfamfam_silk_icons_v013/icons",
+            "linux2": "${HOME}/resources/icons/famfamfam_silk_icons_v013/icons",
+            "darwin": "${HOME}/resources/icons/famfamfam_silk_icons_v013/icons"
+        },
+
+        "//": null
+    },
+
+    "USER_CACHE_PATH": "~/.pywebui_cache",
+
+    "//": null
+}

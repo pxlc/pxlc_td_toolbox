@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+<head>
+<title>QWebKit Test Page</title>
+
+<!-- /////////////////////////////// external CSS links /////////////////////////////// -->
+<link rel="stylesheet" type="text/css"
+        href="{{ FPRE }}{{ APP_DIR_PATH }}/3rdparty/css/ionicons.min.css">
+
+<link rel="stylesheet" type="text/css"
+    href="{{ FPRE }}{{ APP_DIR_PATH }}/css/{{ APP_THEME }}.css">
+
+<!-- /////////////////////////////// external JavaScript library links /////////////////////////////// -->
+<!--
+<script src="{{ FPRE }}{{ WEB_LIB_PATH }}/3rdparty/jQuery/jQuery-2.1.4/jquery-2.1.4.js"></script>
+<script src="{{ FPRE }}{{ WEB_LIB_PATH }}/3rdparty/AngularJS/AngularJS-1.4.3/angular-1.4.3.js"></script>
+<script src="{{ FPRE }}{{ WEB_LIB_PATH }}/3rdparty/Bootstrap/Bootstrap-3.3.5/dist/js/bootstrap.js"></script>
+-->
+
+<!-- /////////////////////////////// inline css /////////////////////////////// -->
+<style>
+</style>
+
+</head>
+
+<body class="pwui_text_font" onload="page_init()">
+
+<div>
+
+    <div id="app_title_div">
+        <span id="app_title_span" class="pwui_title_font">PyWebUI Example</span>
+    </div>
+
+    <div id="app_context_div" class="pwui_context_panel">
+        <span id="app_context_span" class="pwui_title_font">No Context Set</span>
+    </div>
+
+    <div id="app_operations_div">
+        <span class="ion-android-locate pwui_ionicon_btn" title="Open Set Context Panel..."
+            onclick="pwui.go_to_cmd_panel('seq_shot_select');"></span>
+        <span class="ion-beaker pwui_ionicon_btn" title="Open Test Command Panel..."
+            onclick="pwui.go_to_cmd_panel('test_cmd');"></span>
+        <span class="ion-code-working pwui_ionicon_btn" title="Run Worker Op Test..."
+            onclick="pwui.go_to_cmd_panel('worker_op_test');"></span>
+        <span class="ion-cube pwui_ionicon_btn" title="Show Pop-up"
+            onclick="pwui.test_popmsg_open();"></span>
+        <span class="ion-code-working pwui_ionicon_btn" title="Run My Own Cmd..."
+            onclick="pwui.go_to_cmd_panel('my_cmd');"></span>
+        <!--
+        <span class="ion-cube pwui_ionicon_btn" title="Launch Blender"
+            onclick="pwui.call_python('op:launch_app', {'app_name':'blender'});"></span>
+            -->
+    </div>
+
+    <div id="app_cmd_container_div">
+    </div>
+
+</div>
+
+
+<div id="id_popmsg_blocker" class="pwui_popmsg_blocker" style="display: none;">
+    <div id="id_popup_box" class="pwui_popmsg_box">
+        <div>
+            <div class="pwui_popmsg_title"><span id="id_popmsg_title_icon" class="ion-ionic"><span id="id_popmsg_title_text" class="pwui_popmsg_title_text">Pop-up Message Title</span></div>
+            <div id="id_popmsg_text" class="pwui_popmsg_text">This is just some text to fill in the message area with, so we can see how it all looks when it does pop up!</div>
+        </div>
+        <div class="pwui_popmsg_section_container">
+            <div class="pwui_popmsg_progress_back">
+                <div id="id_popmsg_progress" class="pwui_popmsg_progress"></div>
+            </div>
+        </div>
+        <div id="id_popmsg_progress_info">
+        </div>
+        <div id="id_popmsg_btn_container" class="pwui_popmsg_section_container pwui_inline_block_center">
+            <div class="pwui_button" style="width: 80px; display: none;">OK</div>
+            <div class="pwui_button" style="width: 80px;">CANCEL</div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{{ FPRE }}{{ APP_DIR_PATH }}/js/pwui.js"></script>
+
+{{ CMD_SCRIPTS }}
+
+<!-- inline JavaScript -->
+<script>
+
+function button_click( evt )
+{
+    alert("Hello!");
+    var el = evt.target;
+    el.style.display = "none";
+}
+
+function page_init() {
+    // do any JavaScript initialization operations that will run on page load
+}
+
+</script>
+
+</body>
+
+</html>
+
+

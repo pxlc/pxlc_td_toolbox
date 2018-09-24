@@ -1,0 +1,41 @@
+
+<div style="padding: 0px;" pwui_cmd_name="{{ CMD_NAME }}">
+
+<div class="Q_cmd_top pwui_dialog_title pwui_title_font">
+    {{ CMD_TITLE }}
+</div>
+
+<div class="Q_cmd_top pwui_dialog_panel" pwui_cmd="{{ CMD_NAME }}">
+    <div class="Q_cmd_input">
+        <p class="pwui_entry">Client: <input type="text" name="client_name" size="35" value=""></p>
+        <p class="pwui_entry">Project Year: <input type="number" name="project_year" value="" num_type="int"></p>
+        <p class="pwui_entry">Invoice Amount: <input type="number" name="invoice_amt" value=""></p>
+        <p class="pwui_entry">Type of Studio:
+            Feature Animation <input type="radio" name="studio_type" value="Feature Animation">
+            Film &amp; TV Visual Effects <input type="radio" name="studio_type" value="Film & TV Visual Effects">
+            Commercial Work <input type="radio" name="studio_type" value="Commercial Work"> 
+        </p>
+        <p class="pwui_entry">Primary Renderer:
+            Renderman <input type="radio" name="main_renderer" value="renderman" checked="checked">
+            Arnold <input type="radio" name="main_renderer" value="arnold">
+            Mentalray <input type="radio" name="main_renderer" value="mentalray"> 
+        </p>
+        <p class="pwui_entry">Other Apps: 
+            Uses Mari <input type="checkbox" name="uses_mari">
+            Uses Katana <input type="checkbox" name="uses_katana">
+            Uses Nuke <input type="checkbox" name="uses_nuke">
+            Uses RV<input type="checkbox" name="uses_rv" checked="checked">
+        </p>
+    </div>
+    <div class="Q_cmd_actions">
+        <!--
+        <img width="16px" src="{{ FPRE }}{{ ICON_DIR_PATH }}/accept.png" title="Hello?"/>
+        -->
+        <div class="pwui_button" style="width: 80px;"
+            onclick="pwui.handle_cmd(event, CMD_{{ CMD_NAME }});">Submit</div>
+    </div>
+</div>
+
+</div>
+
+

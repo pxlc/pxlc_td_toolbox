@@ -1,0 +1,11 @@
+{
+    "CMD_TITLE": "Sequence/Shot Selector",
+    "FILLERS": [
+        {"template_key": "SEQ_SELECT_OPTION_LIST", "filler_type": "data_list",
+            "query_info": {"backend_server": "data/main_projects.db", "backend_type": "sqlite3",
+                            "entity_type": "Sequence", "filters": [["project_id","=",1]], "fields": ["id","code"],
+                            "order_by": ["id","asc"]}
+        }
+    ],
+    "ID_GENERATE_LIST": [ "SHOT_SELECT_ID" ]
+}

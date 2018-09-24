@@ -1,0 +1,26 @@
+
+<div style="padding: 0px;" pwui_cmd_name="{{ CMD_NAME }}">
+
+<div class="Q_cmd_top pwui_dialog_title pwui_title_font">
+    {{ CMD_TITLE }}
+</div>
+
+<div class="Q_cmd_top pwui_dialog_panel" pwui_cmd="{{ CMD_NAME }}">
+    <div class="Q_cmd_input">
+        <p class="pwui_entry">Source File: <input type="text" name="src_filepath" size="72" value=""></p>
+        <p class="pwui_entry">Dest Dir Path: <input type="text" name="dst_dirpath" size="72" value=""></p>
+        <p class="pwui_entry">Number Dest Files: <input type="number" name="num_files" value="1" num_type="int"></p>
+        <input type="hidden" name="_cmd_op_type_" value="WORKER_OP">
+    </div>
+    <div class="Q_cmd_actions">
+        <!--
+        <img width="16px" src="{{ FPRE }}{{ ICON_DIR_PATH }}/accept.png" title="Hello?"/>
+        -->
+        <div class="pwui_button" style="width: 80px;"
+            onclick="pwui.handle_cmd(event, CMD_{{ CMD_NAME }});">Submit</div>
+    </div>
+</div>
+
+</div>
+
+

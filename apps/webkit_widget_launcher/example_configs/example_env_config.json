@@ -1,0 +1,82 @@
+[
+
+{
+    "//": "Comments are handled with a key value of '//', which will be ignored in processing.",
+    "//": "",
+    "var": "PWUI_TOOLS_ROOT",
+    "value": "${PWUI_TOOLS_DEPLOYMENT_ROOT}/${PWUI_TOOLS_VERSION}",
+    "type": "dir_path",
+
+    "//": "if 'type' is 'dir_path' then os.path.expanduser() and os.path.expandvars() are applied to the value.",
+
+    "//": "End each dictionary with a '\"//\": null' in order to clear any comments and ensure no trailing comma.",
+    "//": null
+},
+
+{
+    "var": "PWUI_USER_CACHE_ROOT",
+    "value": "~/.pwui_cache",
+    "type": "dir_path",
+
+    "//": "if 'type' is 'dir_path' then os.path.expanduser() and os.path.expandvars() are applied to the value.",
+
+    "//": null
+},
+
+{
+    "var": "PATH",
+    "value": [
+        "${PWUI_TOOLS_ROOT}",
+        null
+    ],
+
+    "type": "path_list",
+
+    "//": "if 'type' is 'path_list' then each directory path in the list will have os.path.expanduser() and ",
+    "//": "os.path.expandvars() applied to its path value. The list of resulting values will be appended by ",
+    "//": "default to any existing value of the given environment variable. To 'replace' or 'prepend', simply ",
+    "//": "add '.replace' or '.prepend' after 'path_list' in the env_type value. For example, if you wanted to ",
+    "//": "prepend the list of paths to the existing environment variable value, you would specify this: ",
+    "//": "",
+    "//": "     \"type\": \"path_list.prepend\",  ",
+
+    "//": "NOTE: this mechanism will only add a directory path list entry if it doesn't already exist in the ",
+    "//": "      resulting path value that is being built up.",
+
+    "//": null
+},
+
+{
+    "PWUI_EXAMPLE_STRING": "Hello world!",
+    "env_type": "string",
+    "//": null
+},
+
+{
+    "PWUI_EXAMPLE_BOOL": true,
+    "env_type": "boolean",
+    "//": null
+},
+
+{
+    "PWUI_EXAMPLE_INT": 45,
+    "env_type": "integer",
+    "//": null
+},
+
+{
+    "PWUI_EXAMPLE_FLOAT": 101.375,
+    "env_type": "float",
+    "//": null
+},
+
+{
+    "PWUI_EXAMPLE_JSON":
+        "{\"key\": \"some value as a string\", \"i\": 55, \"b\": false}",
+    "env_type": "json",
+    "//": null
+},
+
+null
+
+]

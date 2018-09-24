@@ -1,0 +1,37 @@
+{
+    "//": "Comment",
+
+    "shell": {
+        "win32": {"path": "C:/Windows/System32/cmd.exe",
+                    "fixed_args": ["/K", "title Command Shell"],
+                    "creation_flags": "subprocess.CREATE_NEW_CONSOLE"},
+        "darwin": {"path": "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal", "fixed_args": []},
+        "linux2": {"path": "", "fixed_args": []},
+        "//": null
+    },
+
+    "chrome_browser": {
+        "win32": {"path": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", "fixed_args": []},
+        "darwin": {"path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "fixed_args": []},
+        "linux2": {"path": "", "fixed_args": []},
+        "//": null
+    },
+
+    "blender": {
+        "//": "You can use \"set_cwd\" key with path value to specify current working directory to set to",
+
+        "win32": {"path": "C:/Program Files/Blender Foundation/Blender/blender.exe",
+                    "fixed_args": [],
+                    "creation_flags": "subprocess.CREATE_NEW_CONSOLE"},
+
+        "//": "NOTE: for Blender on Windows, it launches from a command shell, so need 'CREATE_NEW_CONSOLE'",
+        "//": "      in above 'win32' path spec.",
+
+        "darwin": {"path": "/Applications/Blender/blender.app/Contents/MacOS/blender", "fixed_args": []},
+        "linux2": {"path": "", "fixed_args": []},
+
+        "//": null
+    },
+
+    "//": null
+}
