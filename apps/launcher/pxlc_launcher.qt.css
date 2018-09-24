@@ -1,0 +1,20 @@
+QLabel[ cls='Title' ] {
+    font-family: "Merriweather Sans";
+    font-size: 24pt;
+    font-weight: bold;
+}
+QTextBrowser {
+    font-family: "Open Sans";
+    font-size: 12pt;
+    font-weight: normal;
+}
+QTabWidget {
+    font-family: "Montserrat";
+    font-size: 10pt;
+    font-weight: normal;
+}
+QStatusBar {
+    font-family: "Open Sans";
+    font-size: 10pt;
+    font-weight: italic;
+}
