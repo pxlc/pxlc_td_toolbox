@@ -1,0 +1,67 @@
+if has("gui_gtk2")
+    " set guifont=Courier\ 10\ Pitch\ 8
+    set guifont=Deja\ Vu\ Sans\ Mono\ 12
+elseif has("x11")
+    set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
+else
+    " set guifont=Andale_Mono:h12
+    " set guifont=Monaco:h10
+    set guifont=Monaco:h10
+endif
+
+" -- Cursor shape (insert => vertical line)
+"set guicursor=n-v-c:block-Cursor
+"set guicursor+=i:ver30-iCursor
+" -- set guicursor=n-v-c:block,o:hor50,i-ci:hor10,r-cr:hor30,sm:block
+
+" --------------- NEW STUFF ----------------------
+highlight Cursor guifg=black guibg=yellow
+highlight iCursor guifg=white guibg=steelblue 
+set guicursor=n-v-c:block-Cursor 
+set guicursor+=i:ver100-iCursor 
+set guicursor+=n-v-c:blinkon0-Cursor 
+set guicursor+=i:blinkwait20-iCursor 
+" --------------- NEW STUFF ----------------------
+
+set lines=46
+set columns=125
+
+" -- gui tab set-up
+
+set tabpagemax=25
+
+function GuiTabLabel()
+  let label = ''
+  let bufnrlist = tabpagebuflist(v:lnum)
+
+  " -- Add '+' if one of the buffers in the tab page is modified
+  for bufnr in bufnrlist
+    if getbufvar(bufnr, "&modified")
+      let label = '+'
+      break
+    endif
+  endfor
+
+  " -- Append the number of windows in the tab page if more than one
+  let wincount = tabpagewinnr(v:lnum, '$')
+  if wincount > 1
+    let label .= wincount
+  endif
+  if label != ''
+    let label .= ' '
+  endif
+
+  " -- Append the buffer name
+  return label . bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
+endfunction
+
+set guitablabel=%N\ %{GuiTabLabel()}
+" set guitablabel=%N\ %f
+
+
+" -- tab functionality key mappings ...
+
+map \te :tabedit .<CR>
+map \to :tabonly<CR>
+
+

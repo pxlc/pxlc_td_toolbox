@@ -1,0 +1,116 @@
+set nocompatible  " Use Vim defaults (must be first line in file)
+
+filetype indent on
+"set autoindent
+
+set bs=2  " Allow backspacing over everything in insert mode
+
+" Setup a destructive backspace that works in non-insert mode
+"
+set backspace=indent,eol,start
+
+set expandtab  " Expand all tabs to spaces (Shotgun coding guidelines)
+
+set shiftwidth=4
+set softtabstop=4
+
+set tabstop=4  " Always for compatibility with other tools
+
+" ------------------- END OF REQUIRED SETTINGS ---------------------------
+
+" Recommended color settings for best visual clarity and best syntax
+" color scheme ...
+"
+set background=dark
+
+" Note: the koehler colorscheme shows up in gvim ... vim will have
+" different colors for syntax highlighting
+"
+colorscheme koehler
+
+" Set indenting features that are definitely useful for writing code
+"
+set autoindent
+set smarttab
+" set smartindent
+
+" Please no sound! Just set visual bell only ...
+"
+" set vb
+
+" Show matching braces ...
+"
+set showmatch
+
+" Show Mode?
+set showmode
+
+" Set search highlighting on ...
+"
+set hlsearch
+
+" Establish temp directory for swap files ...
+"
+" this is optional ... use it if you don't want .swp files showing up all
+" over the place
+"
+" to use this you must create a directory called tmp in your home directory
+" (e.g. /n/home1/home/maquino or H:\ on windows), and then uncomment the
+" line below
+"
+set directory=$TEMP
+
+" -- faster refresh and settings to keep draw artifacts away ...
+set linespace=1
+set ttyfast
+
+" -- do word wrap - this is safe and does not actually break the lines into multiple lines (just visually)
+" set linebreak
+" set display+=lastline
+
+" -- establish unix line feed character
+set ff=unix
+set nu
+
+" Be sure that syntax highlighting is on ...
+"
+syntax on
+
+augroup syntax
+    autocmd BufNewFile *.c,*.cpp,*.C,*.h,*.js,*.sl,*.pl,*.pma,*.py,*.rb syn keyword cTodo contained TODO FIXME XXX CHECK NYI KLUDGE NOTE NB REMOVE OPT REDO HACK EXCEPTIONS JJJ
+    autocmd BufReadPost *.c,*.cpp,*.C,*.h,*.js,*.sl,*.pl,*.pma,*.py,*.rb syn keyword cTodo contained TODO FIXME XXX CHECK NYI KLUDGE NOTE NB REMOVE OPT REDO HACK EXCEPTIONS JJJ
+    autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2
+augroup END 
+
+" -- disable middle mouse clicks (want to only use it for scrolling)
+:map <MiddleMouse> <Nop>
+:imap <MiddleMouse> <Nop>
+:map <2-MiddleMouse> <Nop>
+:imap <2-MiddleMouse> <Nop>
+:map <3-MiddleMouse> <Nop>
+:imap <3-MiddleMouse> <Nop>
+:map <4-MiddleMouse> <Nop>
+:imap <4-MiddleMouse> <Nop>
+
+" -- this (below) doesn't seem to work! :-(
+"
+" autocmd BufWritePre :set ff=unix
+" autocmd FileWritePre :set ff=unix
+
+" key mappings for gvim AND vim ...
+
+set mouse=a
+
+" Clear current highlighted search, but do not switch hlsearch off ...
+map \\ /adlkfjalgazidghinfladgdchhie<CR>:<ESC>
+
+" Clear bottom status/command area ...
+map \<CR> :<ESC>
+
+
+" Add Markdown syntax support ...
+augroup mkd
+    autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
+augroup END
+
+
