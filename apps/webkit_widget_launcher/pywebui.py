@@ -416,24 +416,22 @@ class AppWindow( QtGui.QMainWindow ):
 
         orig_font_fam_list = font_db.families()[:]
 
-        font_db.addApplicationFont( '{}/3rdparty/fonts/ionicons.ttf'.format( app_dir_path ) )
+        fonts_root = '{}/../../res/fonts'.format( app_dir_path )
+        font_db.addApplicationFont( '{}/ionicons/ionicons.ttf'.format( fonts_root ) )
 
         # --- Code / Mono-space font:
-        font_db.addApplicationFont( '{}/3rdparty/fonts/DejaVuSansMono.ttf'.format( app_dir_path ) )
-
-        # font_db.addApplicationFont( '{}/3rdparty/fonts/Rubik-Regular.ttf'.format( app_dir_path ) )
-        # font_db.addApplicationFont( '{}/3rdparty/fonts/Rubik-Bold.ttf'.format( app_dir_path ) )
+        font_db.addApplicationFont( '{}/DejaVuSansMono/DejaVuSansMono.ttf'.format( fonts_root ) )
 
         # --- Header and Title font:
-        font_db.addApplicationFont( '{}/3rdparty/fonts/MerriweatherSans-Regular.ttf'.format( app_dir_path ) )
-        font_db.addApplicationFont( '{}/3rdparty/fonts/MerriweatherSans-Bold.ttf'.format( app_dir_path ) )
-        font_db.addApplicationFont( '{}/3rdparty/fonts/MerriweatherSans-ExtraBold.ttf'.format( app_dir_path ) )
+        font_db.addApplicationFont( '{}/MerriweatherSans/MerriweatherSans-Regular.ttf'.format( fonts_root ) )
+        font_db.addApplicationFont( '{}/MerriweatherSans/MerriweatherSans-Bold.ttf'.format( fonts_root ) )
+        font_db.addApplicationFont( '{}/MerriweatherSans/MerriweatherSans-ExtraBold.ttf'.format( fonts_root ) )
 
         # --- Body text font:
-        font_db.addApplicationFont( '{}/3rdparty/fonts/CrimsonText-Roman.ttf'.format( app_dir_path ) )
-        font_db.addApplicationFont( '{}/3rdparty/fonts/CrimsonText-Bold.ttf'.format( app_dir_path ) )
-        font_db.addApplicationFont( '{}/3rdparty/fonts/CrimsonText-Italic.ttf'.format( app_dir_path ) )
-        font_db.addApplicationFont( '{}/3rdparty/fonts/CrimsonText-BoldItalic.ttf'.format( app_dir_path ) )
+        font_db.addApplicationFont( '{}/CrimsonText/CrimsonText-Roman.ttf'.format( fonts_root ) )
+        font_db.addApplicationFont( '{}/CrimsonText/CrimsonText-Bold.ttf'.format( fonts_root ) )
+        font_db.addApplicationFont( '{}/CrimsonText/CrimsonText-Italic.ttf'.format( fonts_root ) )
+        font_db.addApplicationFont( '{}/CrimsonText/CrimsonText-BoldItalic.ttf'.format( fonts_root ) )
 
         full_font_fam_list = font_db.families()
 
