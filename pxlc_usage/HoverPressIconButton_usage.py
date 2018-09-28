@@ -25,10 +25,10 @@
 import sys
 from PySide import QtCore, QtGui
 
-sys.path.append('../../..')
+sys.path.append('..')
 import pxlc
 
-ICONS_ROOT = '../../../res/icons'
+ICONS_ROOT = '../res/icons'
 
 
 class Example(QtGui.QWidget):
@@ -42,8 +42,6 @@ class Example(QtGui.QWidget):
         
         QtGui.QToolTip.setFont(QtGui.QFont('SansSerif', 10))
         
-        self.setToolTip('This is a <b>QWidget</b> widget')
-
         btn = pxlc.qt.HoverPressIconButton(
                         '{iroot}/Icons8_color/png_48/modern_art-48.png'.format(iroot=ICONS_ROOT),
                         bright_factor=1.6, dark_factor=0.65, parent=self)
@@ -58,12 +56,12 @@ class Example(QtGui.QWidget):
         btn.setCursor(QtCore.Qt.PointingHandCursor)
         btn.setObjectName("pushButton")
 
-        btn.setToolTip('This is a <b>QPushButton</b> widget')
+        btn.setToolTip('This is a <i>pxlc</i> <b>HoverPressIconButton</b> widget')
         btn.move(50, 50)       
         btn.setText("")
         
-        self.setGeometry(300, 300, 250, 300)
-        self.setWindowTitle('Tooltips')    
+        self.setGeometry(300, 300, 480, 360)
+        self.setWindowTitle('pxlc HoverPressIconButton usage example')    
         self.show()
         
 
