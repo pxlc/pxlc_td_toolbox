@@ -28,59 +28,62 @@ from PySide import QtCore, QtGui
 ICONS_ROOT = '../../../res/icons'
 
 
-class MyButton2(QtGui.QPushButton):
+class IconButton(QtGui.QPushButton):
 
-    def __init__(self, parent=None):
-        super(MyButton2, self).__init__(parent)
+    def __init__(self, icon_image_filepath, bright_factor=1.5, dark_factor=0.75, parent=None):
+        super(IconButton, self).__init__(parent)
 
-    def enterEvent(self, evt):
-        print(':: enter event?')
+        img = QtGui.QImage()
+        img.load(icon_image_filepath)
 
-    def leaveEvent(self, evt):
-        print(':: leave event?')
-
-
-class MyButton(QtGui.QPushButton):
-
-    def __init__(self, q_image_normal, q_image_hover, q_image_press, parent=None):
-        super(MyButton, self).__init__(parent)
+        img_bright = self._get_brighter_image(img, bright_factor)
+        img_dark = self._get_darker_image(img, dark_factor)
 
         self.icon_normal = QtGui.QIcon()
-        self.icon_normal.addPixmap(QtGui.QPixmap.fromImage(q_image_normal))
+        self.icon_normal.addPixmap(QtGui.QPixmap.fromImage(img))
 
         self.icon_hover = QtGui.QIcon()
-        self.icon_hover.addPixmap(QtGui.QPixmap.fromImage(q_image_hover))
+        self.icon_hover.addPixmap(QtGui.QPixmap.fromImage(img_bright))
 
         self.icon_press = QtGui.QIcon()
-        self.icon_press.addPixmap(QtGui.QPixmap.fromImage(q_image_press))
+        self.icon_press.addPixmap(QtGui.QPixmap.fromImage(img_dark))
 
         self.setIcon(self.icon_normal)
+
+        self.mouse_btn_pressed = False
+        self.mouse_hover_on = False
 
     def enterEvent(self, evt):
-        self.setIcon(self.icon_hover)
+        self.mouse_hover_on = True
+        if not self.mouse_btn_pressed:
+            self.setIcon(self.icon_hover)
 
     def leaveEvent(self, evt):
-        self.setIcon(self.icon_normal)
+        self.mouse_hover_on = False
+        if not self.mouse_btn_pressed:
+            self.setIcon(self.icon_normal)
 
+    def mousePressEvent(self, evt):
+        self.mouse_btn_pressed = True
+        self.setIcon(self.icon_press)
 
-class Example(QtGui.QWidget):
-    
-    def __init__(self):
-        super(Example, self).__init__()
-        
-        self.initUI()
-        
+    def mouseReleaseEvent(self, evt):
+        self.mouse_btn_pressed = False
+        if self.mouse_hover_on:
+            self.setIcon(self.icon_hover)
+        else:
+            self.setIcon(self.icon_normal)
 
-    def _get_brighter_image(self, q_image):
+    def _get_brighter_image(self, q_image, bright_factor):
 
         img = q_image.copy(0, 0, q_image.height(), q_image.width())
 
         for y in range(img.height()):
             for x in range(img.width()):
                 color = img.pixel(x, y)
-                r = (float(QtGui.qRed(color)) / 255.0) * 1.25
-                g = (float(QtGui.qGreen(color)) / 255.0) * 1.25
-                b = (float(QtGui.qBlue(color)) / 255.0) * 1.25
+                r = (float(QtGui.qRed(color)) / 255.0) * bright_factor
+                g = (float(QtGui.qGreen(color)) / 255.0) * bright_factor
+                b = (float(QtGui.qBlue(color)) / 255.0) * bright_factor
                 a = float(QtGui.qAlpha(color) / 255.0)
                 if r > 1.0:
                     r = 1.0
@@ -94,25 +97,29 @@ class Example(QtGui.QWidget):
                 # which returns a long int for the index to color table
                 # -----------------------------------------------------------------------
                 img.setPixel(x, y, QtGui.QColor.fromRgbF(r, g, b, a).rgba())
-                # print('    (%s, %s) is (%s, %s, %s, %s)' % (x, y, r, g, b, a))
         return img
 
-
-    def _get_darker_image(self, q_image):
+    def _get_darker_image(self, q_image, dark_factor):
 
         img = q_image.copy(0, 0, q_image.height(), q_image.width())
 
         for y in range(img.height()):
             for x in range(img.width()):
                 color = img.pixel(x, y)
-                r = (float(QtGui.qRed(color)) / 255.0) * 0.75
-                g = (float(QtGui.qGreen(color)) / 255.0) * 0.75
-                b = (float(QtGui.qBlue(color)) / 255.0) * 0.75
+                r = (float(QtGui.qRed(color)) / 255.0) * dark_factor
+                g = (float(QtGui.qGreen(color)) / 255.0) * dark_factor
+                b = (float(QtGui.qBlue(color)) / 255.0) * dark_factor
                 a = float(QtGui.qAlpha(color) / 255.0)
                 img.setPixel(x, y, QtGui.QColor.fromRgbF(r, g, b, a).rgba())
-                # print('    (%s, %s) is (%s, %s, %s, %s)' % (x, y, r, g, b, a))
         return img
 
+
+class Example(QtGui.QWidget):
+
+    def __init__(self):
+        super(Example, self).__init__()
+
+        self.initUI()
 
     def initUI(self):
         
@@ -120,14 +127,9 @@ class Example(QtGui.QWidget):
         
         self.setToolTip('This is a <b>QWidget</b> widget')
 
-        img = QtGui.QImage()
-        img.load('{iroot}/Icons8_color/png_48/modern_art-48.png'.format(iroot=ICONS_ROOT))
-
-        img_bright = self._get_brighter_image(img)
-        img_dark = self._get_darker_image(img)
-        
-        # btn = MyButton(img, img_bright, img_dark, self)
-        btn = MyButton(img, img_dark, img_dark, self)
+        btn = IconButton('{iroot}/Icons8_color/png_48/modern_art-48.png'.format(iroot=ICONS_ROOT),
+                         bright_factor=1.6, dark_factor=0.65,
+                         parent=self)
 
         btn.setMinimumSize(QtCore.QSize(128, 128))
         btn.setMaximumSize(QtCore.QSize(128, 128))
