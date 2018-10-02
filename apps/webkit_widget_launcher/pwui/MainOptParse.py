@@ -45,7 +45,8 @@ class MainOptParse( object ):
         self.script = None
 
 
-    def add_opt( self, short_name, long_name, help_str, dest=None, opt_type=None, allowed=[], not_allowed=[] ):
+    def add_opt( self, short_name, long_name, help_str, dest=None, opt_type=None, default_value=None,
+                 allowed=[], not_allowed=[] ):
 
         opt_info = {}
 
@@ -57,11 +58,18 @@ class MainOptParse( object ):
             opt_info['long'] = long_name
 
         opt_info['help'] = help_str
+        if default_value is not None:
+            opt_info['default'] = default_value
 
-        opt_key = dest if dest else long_name
+        opt_key = short_name
+        if long_name:
+            opt_key = long_name
+        if dest:
+            opt_key = dest
         if not opt_key:
-            raise Exception('No destination opt key or long name provided.')
+            raise Exception('No destination opt key, long, or short name provided.')
 
+        opt_info['value'] = None
         opt_info['type'] = opt_type  # Note that value here of None means simple flag, no value
         if not opt_type:
             opt_info['value'] = False
@@ -79,7 +87,11 @@ class MainOptParse( object ):
 
         opt_info = self.opt_info_by_key.get( opt_key )
         if opt_info:
-            return opt_info.get('value')
+            value = opt_info.get('value')
+            default = opt_info.get('default')
+            if value is None:
+                return default
+            return value
         return None
 
 
@@ -90,12 +102,7 @@ class MainOptParse( object ):
         print('')
 
         for opt_key in self.opt_key_list:
-            opt_info = self.opt_info_by_key.get( opt_key )
-            if not opt_info:
-                continue
-            opt_value = opt_info.get('value')
-            if not opt_value:
-                continue
+            opt_value = self.get_opt_value( opt_key )
             print('')
             if type(opt_value) in types.StringTypes:
                 print(' :: {} = "{}"'.format( opt_key, opt_value ))
@@ -126,7 +133,7 @@ class MainOptParse( object ):
     def usage( self ):
 
         print('')
-        print('  Usage: python {} [OPTIONS] ')
+        print('  Usage: python {} [OPTIONS] '.format(self.script))
         print('')
         print('  ---[ OPTIONS ]---')
         for opt_key in self.opt_key_list:
@@ -136,8 +143,27 @@ class MainOptParse( object ):
             o_type = opt_info.get('type')
             if not o_type:
                 o_type = 'flag'
-            if o_type == 'flag':
-                pass
+            o_default = opt_info.get('default')
+            o_value = self.get_opt_value(opt_key)
+            o_short = opt_info.get('short')
+            o_long = opt_info.get('long')
+            o_help = opt_info.get('help')
+            usage_arr = ['  ']
+            if o_short:
+                usage_arr.append('-{}'.format(o_short))
+                if o_type != 'flag':
+                    usage_arr.append('<{}>'.format(o_long.upper().replace('-','_')))
+                if o_long:
+                    usage_arr.append('|')
+            if o_long:
+                usage_arr.append('--{}'.format(o_long))
+                if o_type != 'flag':
+                    usage_arr.append('<{}>'.format(o_long.upper().replace('-','_')))
+            usage_arr.append('...')
+            usage_arr.append(o_help)
+            print('')
+            print(' '.join(usage_arr))
+
         print('')
 
         print(' *** USAGE!')
@@ -233,6 +259,7 @@ if __name__ == '__main__':
 
     mop = MainOptParse()
 
+    mop.add_opt( 'v', 'verbose', 'flag to run in verbose mode.' )
     mop.add_opt( 'p', 'path', 'specify a path to use.', opt_type=str )
     mop.add_opt( 'i', 'integer-num', 'provide an integer value to use.', opt_type=int )
     mop.add_opt( 'f', 'float-num', 'provide an float value to use.', opt_type=float )
