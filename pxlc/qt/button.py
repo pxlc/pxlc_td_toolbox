@@ -93,12 +93,23 @@ class HoverPressIconButton(QtGui.QPushButton):
         if not self.mouse_btn_pressed:
             self.setIcon(self.icon_normal)
 
+    # ------------------------------------------------------------------------------------------
+    # NOTE: you do not get "enter" or "leave" events firing between "press" and "release" events
+    # ------------------------------------------------------------------------------------------
+
     def mousePressEvent(self, evt):
         self.mouse_btn_pressed = True
         self.setIcon(self.icon_press)
 
     def mouseReleaseEvent(self, evt):
         self.mouse_btn_pressed = False
+        # self.mouse_hover_on = self.underMouse()  # <-- this does not work
+        pos_mouse =  evt.pos()
+        if self.rect().contains(pos_mouse):
+            self.mouse_hover_on = True
+        else:
+            self.mouse_hover_on = False
+
         if self.mouse_hover_on:
             self.setIcon(self.icon_hover)
             if self.click_action_fn:
