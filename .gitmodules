@@ -1,0 +1,3 @@
+[submodule "pxlc_td"]
+	path = pxlc_td
+	url = https://github.com/pxlc/pxlc_td.git
